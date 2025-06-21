@@ -1,0 +1,552 @@
+@import url('https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+JP+N&display=swap');
+
+:root{
+  --red-shadow: 2px 2px 5px rgba(255, 0, 0, 0.8);
+  --yellow-shadow: 2px 2px 5px rgb(255, 225, 0.8);
+}
+
+html{
+  font-size: 10px;
+  font-family: "WDXL Lubrifont JP N", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
+  scroll-behavior: smooth;
+  background-color: darkred;
+}
+
+html::-webkit-scrollbar-track {
+  background: linear-gradient(red,blue,yellow);
+  border: 1px solid white;
+}
+html::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 1rem;
+}
+html::-webkit-scrollbar-thumb {
+  background: linear-gradient(black);
+  border-radius: 1rem;
+  border: 2px solid #e7dede;
+}
+.mobile{
+  display: none;
+}
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.red{
+  color: red;
+  text-shadow: 2px 2px 5px blue;
+}
+.blue{
+  color: blue;
+}
+.yellow{
+  color: yellow;
+}
+
+header{
+  width: 100%;
+  height: 5rem;
+  z-index: 2;
+
+  background: linear-gradient(
+    90deg,
+    yellow, blue, red
+  );
+  padding: 1rem;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  font-size: 1.5rem;
+  text-shadow: var(--red-shadow);
+  justify-content: space-between;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+header h1{
+  white-space: nowrap;
+  transition: transform 0.1s ease-in-out;
+}
+header h1:hover{
+  transform: scale(1.03);
+}
+
+[class~="navbar"] ul{
+  display: flex;
+}
+.nav-list{
+  margin: 0 2rem;
+  font-size: 2rem;
+  text-shadow: var(--yellow-shadow);
+  list-style-type: none;
+  transition: transform 0.1s ease-in-out;
+}
+.nav-list:hover{
+  transform: scale(1.3);
+}
+#welcome-section{
+  position: relative;
+  margin-top: 5rem;
+  width: 100%;
+  height: calc(100vh - 5rem);
+  background: linear-gradient(darkred, red);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid white;
+}
+#welcome-section h1{
+  white-space: nowrap;
+  font-size: 10rem;
+  transition: color 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+#welcome-section h1:hover{
+  color: red;
+  transform: scale(1.1);
+}
+#welcome-section p{
+  font-size: 5rem;
+  transition: color 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+#welcome-section p:hover{
+  color: red;
+  transform: scale(1.1);
+}
+
+#projects{
+  position: relative;
+  display: block;
+  width: 100%;
+  background: linear-gradient(darkblue, blue);
+  padding: 5rem;
+  z-index: 1;
+  border-bottom: 2px solid white;
+  box-sizing: border-box;
+}
+.tile-container{
+  display: grid;
+  margin: 5rem 0;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill,minmax(40rem, 1fr));
+  gap: 4rem;
+  justify-content: center;
+}
+#projects h1{
+  text-align: center;
+  font-size: 8rem;
+  letter-spacing: 1rem;
+}
+.project-tile{
+  position: relative;
+  width: 40rem;
+  height: 40rem;
+  border-radius: 2%;
+  background: linear-gradient(yellow, blue, red);
+  padding: 1rem; 
+  position: relative;
+  margin: auto;
+}
+
+@media only screen and (max-width: 480px){
+  .tile-container{
+    grid-template-columns: repeat(auto-fill,minmax(30rem, 1fr));
+  }
+  .project-tile{
+    width: 30rem;
+    height: 30rem;
+  }
+  .hey{
+    font-size: 5rem;
+  }
+}
+@media only screen and (max-width: 400px){
+  .tile-container{
+    grid-template-columns: repeat(auto-fill,minmax(25rem, 1fr));
+  }
+  .project-tile{
+    width: 25rem;
+    height: 25rem;
+  }
+  header h1{
+    font-size: 2rem;
+  }
+}
+@media only screen and (max-width: 300px) {
+   .tile-container{
+    grid-template-columns: repeat(auto-fill,minmax(20rem, 1fr));
+  }
+  .project-tile{
+    width: 20rem;
+    height: 20rem;
+  }
+}
+
+.project-tile::before{
+  filter: blur(1.5rem);
+  opacity: 0.5;
+  z-index: -1;
+}
+
+@property --angle{
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.project-tile::after, .project-tile::before{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background-color: white;
+  background-image: conic-gradient(
+    from var(--angle),
+     yellow,
+     blue,
+     red
+  );
+  padding: 5px;
+  animation: rotate 0.8s linear infinite;
+  z-index: -1;
+}
+.project-tile:hover::after, .project-tile:hover::before{
+  animation: rotate 1s linear infinite;
+  background-image: conic-gradient(
+    from var(--angle),
+    transparent,
+    blue
+  );
+  padding: 10px;
+  opacity: 600;
+}
+
+
+@keyframes rotate{
+  from{
+    --angle: 0deg;
+  }
+  to{
+    --angle: 360deg;
+  }
+}
+a{
+  text-decoration: none;
+  color: white;
+}
+.project-tile img{
+  display: block;
+  height: 80%;
+  margin: auto;
+  margin-top: 5%;
+}
+.project-tile p{
+  font-size: 3rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+.project-tile p span{
+  color: transparent;
+  transition: color 0.5s ease-in-out;
+}
+.project-tile p:hover span{
+  color: yellow;
+}
+   /*///Ferris wheel Animation//////*/
+  /*///Ferris wheel Animation//////*/
+ /*///Ferris wheel Animation//////*/
+/*///Ferris wheel Animation//////*/
+.ferris-wheel-container{
+  width: 100%;
+  height: calc(100% - 5rem);
+  background-color: white;
+  border-radius: 2%;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+}
+.wheel{
+  position: absolute;
+  width: 70%;
+  aspect-ratio: 1 / 1;
+  border-radius: 100%;
+  background-color: transparent;
+  border: 5px solid black;
+  transform-origin: 50% 50%;
+  transform: rotate(30deg);
+  left: 15%;
+  top: 10%;
+}
+.line{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 5px;
+  background-color: black;
+  transform-origin: 0% 0%;
+}
+.line:nth-of-type(2){
+  transform: rotate(120deg);
+}
+.line:nth-of-type(3){
+  transform: rotate(240deg);
+}
+.cabin{
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 30%;
+  aspect-ratio: 1 / 1;
+  background-color: yellow;
+  display: block;
+  transform-origin: 50% 0%;
+  border-radius: 10%;
+  box-shadow: 2px 2px 5px black;
+  transform: rotate(-30deg);
+}
+.cabin:nth-of-type(1){
+  top: 50%;
+  right: -15%;
+}
+.cabin:nth-of-type(2){
+  right: 60%;
+  top: 93%;
+  background-color: blue;
+}
+.cabin:nth-of-type(3){
+  left: 10%;
+  top: 6%;
+  background-color: red;
+}
+@keyframes ferris-wheel{
+  0%{
+    transform: rotate(30deg);
+  }
+  100%{
+    transform: rotate(390deg);
+  }
+}
+@keyframes cabin-rotate{
+  0%{
+    transform: rotate(-30deg);
+  }
+  100%{
+    transform: rotate(-390deg);
+  }
+}
+
+.project-tile:hover .wheel{
+  animation: ferris-wheel 5s infinite linear;
+}
+.project-tile:hover .cabin{
+  animation: cabin-rotate 5s infinite linear;
+}
+.circle{
+  position: absolute;
+  width: 10%;
+  aspect-ratio: 1 / 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: black;
+}
+.window{
+  width: 80%;
+  height: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  margin: 10% auto;
+  border-radius: 10%;
+  border: 2px solid black;
+}
+   /*Ferris Whee Style End*/
+  /*Ferris Whee Style End*/
+ /*Ferris Whee Style End*/
+/*Ferris Whee Style End*/
+
+#contacts-section{
+  box-sizing: border-box;
+  width: 100%;
+  background: linear-gradient(rgb(125, 120, 17), yellow);
+  min-height: 50px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.qrContainer header{
+  position: relative;
+}
+.gcashQR{
+  width: 100%;
+}
+@media only screen and (max-width: 550px){
+  .menu{
+    width: 30px;
+    aspect-ratio: 1 / 1;
+    background-color: blue;
+    box-shadow: 2px 2px 5px black;
+    border-radius: 10%;
+    transition: transform 0.1s ease-in-out;
+  }
+  .menu:hover{
+    transform: scale(1.2);
+  }
+  #contacts-section{
+    flex-direction: column;
+  }
+  #info{
+    margin-bottom: 2rem;
+  }
+  #welcome-section h1{
+    font-size: 5rem;
+  }
+  .desktop{
+    display: none;
+  }
+  .mobile{
+    display: block;
+  }
+  #projects h1{
+    font-size: 3rem;
+  }
+  .slidebar{
+    margin: 0;
+    box-sizing: border-box;
+    position: fixed;
+    color: black;
+    display: block;
+    flex-direction: column;
+    background-color: black;
+    width: 80%;
+    z-index: 100;
+    top: 5rem;
+    right: -80%;
+    border: 1px solid blue;
+    transition: right 0.2s ease-in-out;
+    border-radius: 0% 0% 0% 2rem;
+  }
+  .slidebar-list{
+    list-style-type: none;
+    padding: 1rem 2rem;
+    font-size: 2.5rem;
+    width: 100%;
+    height: 100%;
+    border-top: 1px solid white;
+  }
+  .sl1{
+    background: linear-gradient(rgba(255, 255, 0, 0.5),yellow);
+  }
+  .sl2{
+    background: linear-gradient(darkblue,blue);
+  }
+  .sl3{
+    background: linear-gradient(darkred,red);
+    border-radius: 0 0 0 2rem;
+  }
+
+
+  
+
+}
+#info p{
+  white-space: nowrap;
+}
+
+#info{
+  font-size: 2.5rem;
+  color: red;
+  text-shadow: 2px 2px 1px blue;
+}
+#gcash,#paypal{
+  display: block;
+  height: 8rem;
+  border-radius: 2rem 0 2rem 0;
+  box-shadow: 2px 2px 5px black;
+}
+@media only screen and (max-width: 600px){
+  #gcash, #paypal{
+    height: 7rem;
+    margin-right: 0;
+  }
+  #info p{
+    font-size: 2rem;
+  }
+}
+#gcash{
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+
+}
+.link-container{
+  margin-left: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+@media only screen and (max-width: 930px) {
+  .link-container{
+    display: block;
+  }
+}
+#gcash:hover,#paypal:hover{
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+
+.qrContainer{
+   position: fixed;
+   max-width: 400px;
+   width: 90%;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%,-50%);
+   width: 90%;
+   padding: 0;
+   background-color: white;
+   z-index: 1;
+   align-items: center;
+   display: none;
+}
+.qr-text{
+  font-size: 2rem;
+}
+.closeQR{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+  aspect-ratio: 1 / 1;
+  background-color: yellow;
+  box-shadow: 1px 1px 5px black;
+  border-radius: 10%;
+  color: red;
+  font-weight: bold;
+  font-size: 2rem;
+  text-shadow: 2px 2px 10px blue;
+}
+.closeQR:hover{
+  cursor: pointer;
+  transform: scale(1.1);
+  background-color: rgb(141, 141, 15);
+  color: rgb(105, 16, 16);
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+@media only screen and (max-width: 820px){
+  #contacts-section{
+    justify-content: space-evenly;
+  }
+}
+  
+
